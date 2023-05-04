@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Spring Security Example </title>
+</head>
+<body>
+
+<form th:action="@{'/enter'}" method="post">
+  <div><label> User Email: <input type="email" name="user_email"/> </label></div>
+  <div><label> Password: <input type="password" name="user_password"/> </label></div>
+  <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+  <div><input type="submit" value="Sign In"/></div>
+</form>
+<a href="/registration">Зарегистрироваться</a>
+</body>
+</html>
