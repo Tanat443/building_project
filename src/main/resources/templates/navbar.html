@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Building Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Главная </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="map">Карта</a>
+                </li>
+            </ul>
+        </div>
+        <a class="nav-link" href="#" th:text="${#authentication.principal.roles}"></a>
+        <form th:action="@{/logout}" method="post">
+            <input class="btn btn-dark" type="submit" value="Выход"/>
+        </form>
+    </div>
+</nav>

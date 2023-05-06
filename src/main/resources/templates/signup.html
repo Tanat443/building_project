@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+<div layout:fragment="content">
+    <div class="container mt-5">
+        <div class="row  text-center">
+            <div class="col-4 offset-4">
+                <form th:action="@{'/signup'}" method="post">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                    <h1 class="h3 mb-3 fw-normal">Новый пользователь</h1>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="name" class="form-control" id="name" name="name" placeholder="Имя">
+                        <label for="email">Имя</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                        <label for="password">Password</label>
+                    </div>
+                    <button class="w-100 mb-3 btn btn-lg btn-dark" type="submit">Добавить</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

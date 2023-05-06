@@ -26,15 +26,14 @@ public class WebSecurityConfig {
     @Autowired
     private UserService userService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private PasswordEncoderConf conf;
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(conf.passwordEncoder());
 
         http.formLogin()
                 .loginPage("/login")
@@ -42,12 +41,11 @@ public class WebSecurityConfig {
                 .passwordParameter("user_password")
                 .loginProcessingUrl("/enter")
                 .defaultSuccessUrl("/")
-                .failureUrl("/signin?error");
+                .failureUrl("/login?error");
 
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/signin");
-
+                .logoutSuccessUrl("/login");
 
         return http.build();
     }

@@ -1,4 +1,4 @@
-package com.springboot.buildingProject.models;
+package com.springboot.buildingProject.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

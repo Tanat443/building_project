@@ -1,12 +1,14 @@
 package com.springboot.buildingProject.models;
 
+import com.springboot.buildingProject.enums.Role;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,30 +16,28 @@ import java.util.Set;
 @Data
 public class User implements UserDetails {
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
     @Column(name = "name")
     private String name;
     @Column(name = "active")
     private boolean active;
-    @Column(name = "password",length = 1000)
+    @Column(name = "password", length = 1000)
     private String password;
     private LocalDateTime dateOfCreated;
 
     @PrePersist
-    private void init(){
-        dateOfCreated =LocalDateTime.now();
+    private void init() {
+        dateOfCreated = LocalDateTime.now();
     }
 
     //Security
-    @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
-    @CollectionTable(name ="user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
